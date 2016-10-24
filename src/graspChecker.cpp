@@ -25,6 +25,8 @@
 #include <yarp/sig/all.h>
 #include <yarp/math/Math.h>
 
+#include <../include/graspChecker_IDLServer.h>
+
 using namespace std;
 using namespace yarp::os;
 using namespace yarp::sig;
@@ -32,7 +34,7 @@ using namespace yarp::math;
 
 
 /*******************************************************************************/
-class GraspCheckModule : public RFModule
+class GraspCheckModule : public RFModule, public graspChecker_IDLServer
 {
 protected:    
     BufferedPort<ImageOf<PixelRgb> > portImgIn;

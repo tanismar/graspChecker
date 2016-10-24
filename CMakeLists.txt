@@ -14,16 +14,26 @@ list(APPEND CMAKE_MODULE_PATH ${ICUBCONTRIB_MODULE_PATH})
 
 add_definitions(${YARP_DEFINES})   # add yarp definitions - this contains also -D_REENTRANT
 
+include(YarpIDL)
+yarp_idl_to_dir(${PROJECTNAME}.thrift ${CMAKE_CURRENT_SOURCE_DIR})
+
 include(YarpInstallationHelpers)
 include(ICUBcontribHelpers)
 include(ICUBcontribOptions)
 icubcontrib_set_default_prefix()
 
-set(sources src/graspChecker.cpp)
-source_group("Source Files" FILES ${sources})
+
+file(GLOB source src/*.cpp)
+file(GLOB header include/*.h)
+set(idl ${PROJECTNAME}.thrift)
+
+
+source_group("Source Files" FILES ${source})
+source_group("Header Files" FILES ${header})
+source_group("IDL Files" FILES ${idl})
 
 include_directories(${YARP_INCLUDE_DIRS} )
-add_executable(${PROJECTNAME} ${sources})
+add_executable(${PROJECTNAME} ${source} ${header}  ${idl})
 target_link_libraries(${PROJECTNAME} ${YARP_LIBRARIES} )
 install(TARGETS ${PROJECTNAME} DESTINATION bin)
 icubcontrib_add_uninstall_target()
