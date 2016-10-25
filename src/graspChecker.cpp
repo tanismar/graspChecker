@@ -123,7 +123,7 @@ bool GraspCheckModule::configure(ResourceFinder &rf)
 
     ret = ret && portBBcoordsIn.open("/"+name+"/bb:i");
     ret = ret && portImgIn.open("/"+name+"/img:i");
-    ret = ret && portImgIn.open("/"+name+"/img:o");
+    ret = ret && portImgOut.open("/"+name+"/img:o");
 
     ret = ret && portHimRep.open("/"+name+"/himrep:rpc");
     ret = ret && portRpc.open("/"+name+"/rpc:i");
