@@ -12,14 +12,15 @@ using namespace yarp::sig;
 
 
 /*******************************************************************************/
-bool GraspCheckModule::trainObserve(const string &label, const BoundingBox &bb)
+bool GraspCheckModule::trainObserve(const string &label, BoundingBox &bb)
 {
     ImageOf<PixelRgb> img= *portImgIn.read(true);
     portImgOut.write(img);
 
+    Bottle bot;
     // Check if Bounding box was not initialized
     if ((bb.tlx + bb.tly + bb.brx + bb.bry) == 0.0 ){
-        Bottle bot = *portBBcoordsIn.read(true);            // read all bounding boxes
+        bot = *portBBcoordsIn.read(true);            // read all bounding boxes
         Bottle *items=bot.get(0).asList();                  // pick up first bounding box
 
         bb.tlx = items->get(0).asDouble();
@@ -27,7 +28,7 @@ bool GraspCheckModule::trainObserve(const string &label, const BoundingBox &bb)
         bb.brx = items->get(2).asDouble();
         bb.bry = items->get(3).asDouble();
     }else{
-        Bottle bot;
+
         Bottle &items = bot.addList();
         items.addDouble(bb.tlx);
         items.addDouble(bb.tly);
@@ -54,7 +55,7 @@ bool GraspCheckModule::trainObserve(const string &label, const BoundingBox &bb)
 
 
 /**********************************************************/
-bool GraspCheckModule::classifyObserve(string &label, const BoundingBox &bb)
+bool GraspCheckModule::classifyObserve(string &label, BoundingBox &bb)
 {
     ImageOf<PixelRgb> img= *portImgIn.read(true);
     portImgOut.write(img);
@@ -239,9 +240,15 @@ bool GraspCheckModule::check(const double tlx ,const double tly, const double br
 {
     string label;
 
+    BoundingBox bb;
+    bb.tlx = tlx;
+    bb.tly = tly;
+    bb.brx = brx;
+    bb.bry = bry;
+
     cout << "Classifying image from crop " << tlx <<", "<< tly <<", "<< brx <<", "<< bry <<". "<<endl;
 
-    classifyObserve(label);
+    classifyObserve(label, bb);
 
     bool answer;
     if (strcmp (label.c_str(),"full") == 0)

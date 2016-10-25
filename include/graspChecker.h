@@ -46,8 +46,8 @@ protected:
     bool                                running;
 
     /*****  Methods  ****/   
-    bool                trainObserve(const std::string &label);
-    bool                classifyObserve(std::string &label);
+    bool                trainObserve(const std::string &label, BoundingBox &bb);
+    bool                classifyObserve(std::string &label, BoundingBox &bb);
     std::string         processScores(const yarp::os::Bottle &scores);
 
 public:
