@@ -29,6 +29,7 @@
 #include <yarp/math/Math.h>
 
 #include <graspChecker_IDLServer.h>
+#include <BoundingBox.h>
 
 class GraspCheckModule : public yarp::os::RFModule, public graspChecker_IDLServer
 {
@@ -61,8 +62,8 @@ public:
         bool						updateModule();
         double						getPeriod();
 
-        bool                        train(const std::string &label);
-        bool                        check();
+        bool                        train(const std::string &label, const double tlx = 0.0,const double tly = 0.0, const double brx = 0.0, const double bry = 0.0);
+        bool                        check(const double tlx = 0.0,const double tly = 0.0, const double brx = 0.0, const double bry = 0.0);
 
 
 };
