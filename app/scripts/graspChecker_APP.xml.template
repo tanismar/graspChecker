@@ -110,7 +110,7 @@
         <geometry>(Pos ((x 929) (y 548.5)) ((x 785) (y 542)) ((x 1102) (y 553))  )</geometry>
     </connection>
     <connection>
-        <from external="true">/himrepClassifierGraspi/opc</from>
+        <from external="true">/himrepClassifierGrasp/opc</from>
         <to external="true">/memoryGrasp/rpc</to>
         <protocol>tcp</protocol>
         <geometry>(Pos ((x 824.5) (y 287.5)) ((x 500) (y 286)) ((x 1178) (y 287))  )</geometry>
