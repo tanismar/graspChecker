@@ -14,12 +14,6 @@ struct BoundingBox
   4: double bry;
 }
 
-struct Bottle{}
-(
-    yarp.name = "yarp::os::Bottle"
-    yarp.includefile="yarp/os/Bottle.h"
-)
-
 service graspChecker_IDLServer
 {
     /**

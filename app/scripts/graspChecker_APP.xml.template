@@ -44,11 +44,24 @@
     </module>
     <module>
         <name>yarpview</name>
-        <parameters>--name /graspViewer/nearBlob --compact</parameters>
+        <parameters>--x 350 --y 0 --name /graspViewer/nearBlob --compact</parameters>
         <node>console</node>
         <prefix></prefix>
         <geometry>(Pos (x 794) (y 148.9))</geometry>
     </module>
+    <module>
+        <name>yarpview</name>
+        <parameters>--x 350 --y 350  --name /graspViewer/crop --compact</parameters>
+        <node>console</node>
+        <prefix></prefix>
+        <geometry>(Pos (x 794) (y 148.9))</geometry>
+    </module>
+    <connection>
+        <from external="true">/graspChecker/img:o</from>
+        <to external="true">/graspViewer/crop </to>
+        <protocol>tcp</protocol>
+        <geometry>(Pos ((x 965.5) (y 628)) ((x 859) (y 629)) ((x 1101) (y 625))  )</geometry>
+    </connection>
     <connection>
         <from external="true">/icub/camcalib/left/out</from>
         <to external="true">/graspChecker/img:i</to>
