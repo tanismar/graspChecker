@@ -78,7 +78,7 @@ bool GraspCheckModule::classifyObserve(string &label, BoundingBox &bb)
         }
     }else{
         Bottle &item=options.addList();                 // cmd = classify (())
-        item.addString("blob_1");                       // cmd = classify ((blob_i))
+        item.addString("blob_0");                       // cmd = classify ((blob_i))
         Bottle &bbox = item.addList();                  // cmd = classify ((blob_i ()))
         bbox.addDouble(bb.tlx);
         bbox.addDouble(bb.tly);
@@ -101,7 +101,7 @@ bool GraspCheckModule::classifyObserve(string &label, BoundingBox &bb)
 /**********************************************************/
 string GraspCheckModule::processScores(const Bottle &scores)
 {
-
+    cout << " Processing the scores" << endl;
     double maxScoreObj=0.0;
     string label  ="";
 
@@ -185,6 +185,8 @@ bool GraspCheckModule::close()
 
     portHimRep.close();
     portRpc.close();
+
+    running = false;
     return true;
 }
 
@@ -250,12 +252,13 @@ bool GraspCheckModule::check(const double tlx ,const double tly, const double br
 
     classifyObserve(label, bb);
 
+    cout<< " classifyObserve returned "<< label << endl;
+
     bool answer;
     if (strcmp (label.c_str(),"full") == 0)
         answer = true;
     else
         answer = false;
-
 
     //answer = false;
 
