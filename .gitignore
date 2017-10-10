@@ -1,0 +1,16 @@
+*~
+*IDLServer.*
+
+## IDL generated files
+*IDLServer.h
+
+## generic files to ignore
+*.lock
+*.DS_Store
+*.swp
+*.out
+
+## build dirs
+build*/
+data/
+

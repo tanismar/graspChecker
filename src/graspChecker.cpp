@@ -16,6 +16,7 @@ bool GraspCheckModule::trainObserve(const string &label, BoundingBox &bb)
 {
     cout<< " Training image with label " << label << endl;
     ImageOf<PixelRgb> img= *portImgIn.read(true);
+
     portImgOut.write(img);
 
     Bottle bot;
